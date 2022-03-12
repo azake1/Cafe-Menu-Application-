@@ -21,6 +21,7 @@ const Menu = ({ data }) => {
                 <Button>-</Button>
                 <span>{count}</span>
                 <Button>+</Button>
+                {/* make it work */}
                 <Button
                   variant="outlined"
                   sx={{

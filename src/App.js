@@ -3,7 +3,7 @@ import Categories from "./Categories";
 import axios from "axios";
 
 
-
+// fake API 
 // https://mocki.io/v1/88872b96-14d1-4a67-99ab-2e013f9144f0
 function App() {
   const [menuItems, setMenuItems] = useState([]);
