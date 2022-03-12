@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Categories from "./Categories";
 import axios from "axios";
-<<<<<<< HEAD
 import Menu from "./components/Menu";
-=======
-import Menu from "./components/Menu"
->>>>>>> 710bffa1a75120268822ed5b0bea0b4d3e586c92
-
 
 function App() {
   const [menuItems, setMenuItems] = useState([]);
@@ -14,22 +9,30 @@ function App() {
   const [filteredFoodList, setFilteredFoodList] = useState([])
   const [categories, setCategories] = useState([])
 
+
   //Millana
-  const [data, setData] = useState([])
+
   //const [isLoading, setIsLoading] = useState(true)
 
   //Want to make API
-  const getData = async() => {
-    const api = await axios.get("https://mocki.io/v1/491c6463-28ea-404f-bfe4-86fecd77fa67")
-    setData(api.data.menu)
+  const getData = async () => {
+    try {
+      const api = await axios.get("https://mocki.io/v1/a017e031-466a-4a49-891e-85495999669c")
+      console.log(api.data)
+      setMenuItems(api.data)
+      setFilteredFoodList(api.data)
+    } catch (err) {
+      console.log(err, "Something went wrong!")
+    }
+
   }
   useEffect(() => {
     getData()
   }, [])
 
   useEffect(() => {
-      let menuItems = data.filter((item) => item.category === selectedCategory || selectedCategory === "all");
-      setFilteredFoodList(menuItems);
+    let filtered = menuItems.filter((item) => item.category === selectedCategory || selectedCategory === "all");
+    setFilteredFoodList(filtered);
   }, [])
 
   const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
@@ -41,14 +44,13 @@ function App() {
           <h2>our menu</h2>
           <div className="underline"></div>
         </div>
-<<<<<<< HEAD
+
         <Categories categories={categories} filterItems={filterItems} />
         <Menu items={menuItems} />
         <button>test</button>
-=======
-        <Categories categories={categories} filteredFoodList={filteredFoodList} />
-        <Menu data={data} />
->>>>>>> 710bffa1a75120268822ed5b0bea0b4d3e586c92
+        <Categories filteredFoodList={filteredFoodList} categoryList={categoryList} />
+        <Menu data={menuItems} filteredData={filteredFoodList} />
+
       </section>
     </main>
   );
