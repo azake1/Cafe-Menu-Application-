@@ -2,11 +2,11 @@ import React from "react";
 import { Button } from "@mui/material"
 import { useState } from "react"
 
-const Menu = ({ items }) => {
+const Menu = ({ data }) => {
   const [count, setCount] = useState(1)
   return (
     <div className="section-center">
-      {items.map((menuItem) => {
+      {data.map((menuItem) => {
         const { id, title, img, desc, price } = menuItem;
         return (
           <article key={id} className="menu-item">
