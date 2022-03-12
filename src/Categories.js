@@ -1,9 +1,9 @@
 import React from "react";
 
-const Categories = ({ categories, filterItems }) => {
+const Categories = ({filterItems, categoryList}) => {
   return (
     <div className="btn-container">
-      {categories.map((category, index) => {
+      {categoryList.map((category, index) => {
         return (
           <button
             type="button"
