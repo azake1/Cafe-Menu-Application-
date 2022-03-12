@@ -28,6 +28,7 @@ function App() {
         </div>
         <Categories categories={categories} filterItems={filterItems} />
         <Menu items={menuItems} />
+        <button>Test 1</button>
       </section>
     </main>
   );
