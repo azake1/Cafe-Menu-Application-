@@ -4,6 +4,8 @@ import Categories from "./Categories";
 import items from "./data";
 const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 
+
+// https://mocki.io/v1/88872b96-14d1-4a67-99ab-2e013f9144f0
 function App() {
   const [menuItems, setMenuItems] = useState(items);
   const [categories, setCategories] = useState(allCategories);
@@ -16,7 +18,7 @@ function App() {
     const newItems = items.filter((item) => item.category === category);
     setMenuItems(newItems);
   };
-
+ 
   return (
     <main>
       <section className="menu section">
