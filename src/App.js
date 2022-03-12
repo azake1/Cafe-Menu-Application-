@@ -1,24 +1,37 @@
-import React, { useState } from "react";
-import Menu from "./Menu";
+import React, { useEffect, useState } from "react";
 import Categories from "./Categories";
-import items from "./data";
-const allCategories = ["all", ...new Set(items.map((item) => item.category))];
+import axios from "axios";
+
 
 
 // https://mocki.io/v1/88872b96-14d1-4a67-99ab-2e013f9144f0
 function App() {
-  const [menuItems, setMenuItems] = useState(items);
-  const [categories, setCategories] = useState(allCategories);
+  const [menuItems, setMenuItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [filteredFoodList, setFilteredFoodList] = useState([])
+  const [categories, setCategories] = useState([])
 
-  const filterItems = (category) => {
-    if (category === "all") {
-      setMenuItems(items);
-      return;
-    }
-    const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
-  };
- 
+
+  //Millana
+  const [data, setData] = useState([])
+  //const [isLoading, setIsLoading] = useState(true)
+
+  //Want to make API
+  const getData = async() => {
+    const api = await axios.get("https://mocki.io/v1/88872b96-14d1-4a67-99ab-2e013f9144f0")
+    setData(api.data.menu)
+  }
+  useEffect(() => {
+    getData()
+  }, [])
+
+  useEffect(() => {
+      let menuItems = data.filter((item) => item.category === selectedCategory || selectedCategory === "all");
+      setFilteredFoodList(menuItems);
+  }, [])
+
+  const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
+
   return (
     <main>
       <section className="menu section">
