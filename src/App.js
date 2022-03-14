@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "./Categories";
 import axios from "axios";
 import Menu from './components/Menu'
-import {CircularProgress} from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import Basket from './components/basket'
 // import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ModalPage from "./components/ModalPage";
@@ -14,6 +14,8 @@ function App() {
   const [order, setOrder] = useState([])
   //Millana
   const [total, setTotal] = useState([])
+  //Millana
+  const [millana, setMillana] = useState([])
 
 
 
@@ -42,22 +44,27 @@ function App() {
 
   const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
 
-  return isLoading ? 
-  <div className="loading-page">
-  <h3>Page is loading</h3>
-  <CircularProgress />
-  </div>
-  :
+  return isLoading ?
+    <div className="loading-page">
+      <h3>Page is loading</h3>
+      <CircularProgress />
+    </div>
+    :
     (
       <main>
         <section className="menu section">
           <div className="title">
             <h2>our menu</h2>
-            <ModalPage order={order} total={total}/>
+            <ModalPage order={order} total={total} />
             <div className="underline"></div>
           </div>
           <Categories filteredFoodList={filteredFoodList} categoryList={categoryList} setSelectedCategory={setSelectedCategory} />
-          <Menu data={menuItems} filteredData={filteredFoodList} setOrder={setOrder} setTotal={setTotal}/>
+          {
+            filteredFoodList.map(food => {
+              return <Menu data={food} setOrder={setOrder} setTotal={setTotal} />
+            })
+          }
+          {/* <Menu data={menuItems} filteredData={filteredFoodList} setOrder={setOrder} setTotal={setTotal} /> */}
         </section>
       </main>
     );
