@@ -28,7 +28,7 @@ function ModalPage({order, total}) {
         <div>
           <Button onClick={handleOpen}><ShoppingCartIcon/><span className="span-basket">
               {/* {total.reduce((amount, item) => item.price + amount, 0)} */}
-              {total.map(el => el.price * el.count).reduce((amount, item) => item + amount, 0)}
+              {total.map(el => el.price * el.count).reduce((amount, item) => item + amount ,0).toFixed(2)}
               {/* {total.map(el => <h4>{el.price * el.count}</h4>)} */}
               </span>
           </Button>
