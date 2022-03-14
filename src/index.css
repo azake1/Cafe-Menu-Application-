@@ -187,6 +187,10 @@ Menu
   gap: 3rem 2rem;
   justify-items: center;
 }
+.showMenu{
+  display: grid;
+	grid-template-columns: 600px 600px;
+}
 .menu-item {
   display: grid;
   gap: 1rem 2rem;

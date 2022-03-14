@@ -59,11 +59,13 @@ function App() {
             <div className="underline"></div>
           </div>
           <Categories filteredFoodList={filteredFoodList} categoryList={categoryList} setSelectedCategory={setSelectedCategory} />
+          <div className="showMenu">
           {
             filteredFoodList.map(food => {
               return <Menu data={food} setOrder={setOrder} setTotal={setTotal} />
             })
           }
+          </div>
           {/* <Menu data={menuItems} filteredData={filteredFoodList} setOrder={setOrder} setTotal={setTotal} /> */}
         </section>
       </main>

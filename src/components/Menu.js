@@ -2,10 +2,10 @@ import React from "react";
 import OrderButton from "./orderBtn";
 
 export const Menu = ({data, setOrder, setTotal}) => {
-  const {index, img, title, price, desc} = data
+  const {id, img, title, price, desc} = data
   return (
     <div className="section-center">
-            <article key={index} className="menu-item">
+            <article key={id} className="menu-item">
               <img src={img} alt={title} className="photo" />
               <div className="item-info">
                 <header>
