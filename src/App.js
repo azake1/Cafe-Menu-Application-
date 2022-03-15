@@ -4,7 +4,8 @@ import axios from "axios";
 import Menu from './components/Menu'
 import {CircularProgress} from '@mui/material'
 import ModalPage from "./components/ModalPage";
-import giphy from './image/giphy.gif'
+import {SearchInput} from './components/search'
+
 
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
   const [order, setOrder] = useState([])
   //Millana
   const [total, setTotal] = useState([])
+  //variant
+  const [search, setSearch] = useState('')
 
 
 
@@ -28,12 +31,14 @@ function App() {
       console.log(err, "Something went wrong!")
     }
 
+
+
   }
   useEffect(() => {
     setTimeout(() => {
       getData()
       setIsLoading(false)
-    }, 1000)
+    }, 2000)
   }, [])
 
   useEffect(() => {
@@ -41,13 +46,33 @@ function App() {
     setFilteredFoodList(filtered);
   }, [selectedCategory])
 
+
+
+  useEffect(() => {
+    menuItems.filter(el => {
+      if (search == "") {
+        return el
+      } else if (el.title.toLowerCase().includes(search.toLowerCase())) {
+        return el
+      }
+    }).map(el => <div key={el.id}>{el.title}</div>)
+  }, [search])
+
+
+  const handleInput = (e) => {
+    setSearch(e.target.value)
+  }
+
+
+
+
   const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
 
   return isLoading ?
     <div className="loading-page">
-      {/*<h3>Page is loading</h3>
-      <CircularProgress />*/}
-      <img src="giphy.gif" />
+      <h3>Page is loading</h3>
+      <CircularProgress />
+
     </div>
     :
     (
@@ -57,6 +82,9 @@ function App() {
             <h2>our menu</h2>
             <ModalPage order={order} total={total} />
             <div className="underline"></div>
+          </div>
+          <div className="searchInput">
+            <SearchInput data={menuItems} search={search} setSearch={setSearch} onChange={handleInput} />
           </div>
           <Categories categoryList={categoryList} setSelectedCategory={setSelectedCategory} />
           <div className="box-grid">
