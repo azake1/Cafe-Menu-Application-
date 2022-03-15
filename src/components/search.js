@@ -1,28 +1,29 @@
 import {TextField} from '@mui/material'
+import SearchMenu from './searchMenu'
 
-export const SearchInput = ({data, search, setSearch, onChange}) => {
 
-  //data.filter(el => {
-  //  if (search == "") {
-  //     return el
-  //  } else if (el.title.toLowerCase().includes(search.toLowerCase())){
-  //    return el
-  //     }
-  //}).map(el =><div key={el.id}>{el.title}</div>)
 
+
+const SearchInput = ({search, onChange, data}) => {
 
 
 
   return (
-    <TextField
-      id="filled-search"
-      label="Search field"
-      type="search"
-      variant="filled"
-      value={search}
-      onChange={onChange}
+    <>
+      <TextField
+        id="filled-search"
+        label="Search field"
+        type="search"
+        variant="filled"
+        value={search}
+        onChange={onChange}
 
-    />
+      />
+      <div className="box-grid">
+
+        <SearchMenu search={search} data={data} />
+      </div>
+    </>
   )
 }
-
+export default SearchInput

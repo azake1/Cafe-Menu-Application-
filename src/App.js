@@ -4,9 +4,7 @@ import axios from "axios";
 import Menu from './components/Menu'
 import {CircularProgress} from '@mui/material'
 import ModalPage from "./components/ModalPage";
-import {SearchInput} from './components/search'
-
-
+import SearchInput from './components/search'
 
 function App() {
   const [menuItems, setMenuItems] = useState([]);
@@ -14,14 +12,10 @@ function App() {
   const [filteredFoodList, setFilteredFoodList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [order, setOrder] = useState([])
-  //Millana
   const [total, setTotal] = useState([])
-  //variant
   const [search, setSearch] = useState('')
 
 
-
-  //Want to make API
   const getData = async () => {
     try {
       const api = await axios.get("https://mocki.io/v1/a017e031-466a-4a49-891e-85495999669c")
@@ -30,10 +24,8 @@ function App() {
     } catch (err) {
       console.log(err, "Something went wrong!")
     }
-
-
-
   }
+
   useEffect(() => {
     setTimeout(() => {
       getData()
@@ -47,23 +39,9 @@ function App() {
   }, [selectedCategory])
 
 
-
-  useEffect(() => {
-    menuItems.filter(el => {
-      if (search == "") {
-        return el
-      } else if (el.title.toLowerCase().includes(search.toLowerCase())) {
-        return el
-      }
-    }).map(el => <div key={el.id}>{el.title}</div>)
-  }, [search])
-
-
   const handleInput = (e) => {
     setSearch(e.target.value)
   }
-
-
 
 
   const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
@@ -83,15 +61,20 @@ function App() {
             <ModalPage order={order} total={total} />
             <div className="underline"></div>
           </div>
-          <div className="searchInput">
-            <SearchInput data={menuItems} search={search} setSearch={setSearch} onChange={handleInput} />
-          </div>
+
           <Categories categoryList={categoryList} setSelectedCategory={setSelectedCategory} />
+
+          <div className="searchInput">
+            <SearchInput search={search} onChange={handleInput} data={menuItems} />
+          </div>
+
           <div className="box-grid">
             {filteredFoodList.map(el =>
-              <Menu data={el} filteredData={filteredFoodList} setOrder={setOrder} setTotal={setTotal} />
+              <Menu data={el} setOrder={setOrder} setTotal={setTotal} />
             )}
           </div>
+
+
         </section>
       </main>
     );
