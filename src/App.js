@@ -5,6 +5,7 @@ import Menu from './components/Menu'
 import {CircularProgress} from '@mui/material'
 import ModalPage from "./components/ModalPage";
 import SearchInput from './components/search'
+import logo from './image/loading-food.gif'
 
 function App() {
   const [menuItems, setMenuItems] = useState([]);
@@ -45,11 +46,19 @@ function App() {
 
 
   const categoryList = ["all", ...new Set(menuItems.map((item) => item.category))];
+  //const x = menuItems.filter(el => {
+  //  if (search == "") {
+  //    return el
+  //  } else if (el.title.toLowerCase().includes(search.toLowerCase())) {
+  //    return el
+  //  }
+  //})
 
   return isLoading ?
     <div className="loading-page">
       <h3>Page is loading</h3>
-      <CircularProgress />
+      {/*<CircularProgress />*/}
+      <img src={logo} style={{width: '400px', height: '400px'}} />
 
     </div>
     :
@@ -70,6 +79,7 @@ function App() {
 
           <div className="box-grid">
             {filteredFoodList.map(el =>
+
               <Menu data={el} setOrder={setOrder} setTotal={setTotal} />
             )}
           </div>
