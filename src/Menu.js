@@ -9,6 +9,7 @@ const Menu = ({ items }) => {
           <article key={id} className="menu-item">
             <img src={img} alt={title} className="photo" />
             <div className="item-info">
+              <h1>test</h1>
               <header>
                 <h4>{title}</h4>
                 <h4 className="price">Som{Math.floor(price) * 10}</h4>
