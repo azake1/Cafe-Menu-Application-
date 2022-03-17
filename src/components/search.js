@@ -1,24 +1,24 @@
-import {TextField} from '@mui/material'
+import {FormControl, InputLabel, Box, Input} from '@mui/material'
 import SearchMenu from './searchMenu'
 
 
 
 
 const SearchInput = ({search, onChange, data}) => {
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
   return (
     <>
-      <TextField
-        id="filled-search"
-        label="Search field"
-        type="search"
-        variant="filled"
-        value={search}
-        onChange={onChange}
+      <Box component="form" sx={{'& > :not(style)': {m: 1}, }} noValidate autoComplete="off">
+        <FormControl variant="standard" onSubmit={handleSubmit}>
+          <InputLabel htmlFor="component-simple"></InputLabel>
+          <Input id="component-simple" value={search} onChange={onChange} />
+        </FormControl>
+      </Box>
 
-      />
+
       <div className="box-grid">
 
         <SearchMenu search={search} data={data} />
